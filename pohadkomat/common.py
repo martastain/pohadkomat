@@ -14,10 +14,21 @@ class PohadkomatConfig(BaseModel):
     download_path: str = "data/pohadky/"
     database_path: str = "data/pohadky.db"
     feeds: list[FeedConfig] = Field(default_factory=list)
-    default_artist: str = Field("Pohadky") 
+    default_artist: str = Field("Pohadky")
+    clips_per_batch: int = Field(2)
+    chromecast_name: str = Field("Living room display")
+    http_port: int = Field(9733)
+    access_url: str = "http://localhost:9733"
 
 
-def load_config():
+def load_config() -> PohadkomatConfig:
+    try:
+        with open("pohadkomat.toml") as f:
+            settings = toml.load(f).get("pohadkomat", [])
+    except Exception:
+        log_traceback()
+        critical_error()
+
     try:
         with open("feeds.toml") as f:
             feeds = toml.load(f).get("feeds", [])
@@ -27,6 +38,7 @@ def load_config():
 
     return PohadkomatConfig(
         feeds=[FeedConfig(**feed) for feed in feeds],
+        **settings,
     )
 
 

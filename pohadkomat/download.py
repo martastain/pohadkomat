@@ -68,6 +68,6 @@ def process_feed(feed: FeedConfig):
                 os.remove(target_path.path)
 
 
-def main():
+def download_all():
     for feed in config.feeds:
         process_feed(feed)

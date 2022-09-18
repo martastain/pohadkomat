@@ -1,4 +1,9 @@
-[paths]
+[pohadkomat]
 
-download = "data/pohadky"
-database = "data/pohadkomat.db"
+download_path = "data/pohadky"
+database_path = "data/pohadkomat.db"
+default_artist = "Pohadky"
+clips_per_batch = 2
+chromecast_name = "Living room display"
+http_port = 9734
+access_url = "http://192.168.5.189.:9734"
