@@ -1,0 +1,4 @@
+[paths]
+
+download = "data/pohadky"
+database = "data/pohadkomat.db"
