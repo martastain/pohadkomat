@@ -1,5 +1,6 @@
 import toml
 
+from typing import Optional
 from pydantic import BaseModel, Field
 from nxtools import log_traceback, critical_error
 
@@ -7,12 +8,12 @@ from nxtools import log_traceback, critical_error
 class FeedConfig(BaseModel):
     title: str = Field(...)
     url: str = Field(...)
-    artist: str | None = Field(None)
+    artist: Optional[str] = Field(None)
 
 
 class PohadkomatConfig(BaseModel):
     download_path: str = "data/pohadky/"
-    database_path: str = "data/pohadky.db"
+    asrun_path: str = "asrun.lst"
     feeds: list[FeedConfig] = Field(default_factory=list)
     default_artist: str = Field("Pohadky")
     clips_per_batch: int = Field(2)

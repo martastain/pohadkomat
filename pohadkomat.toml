@@ -1,9 +1,9 @@
 [pohadkomat]
 
-download_path = "data/pohadky"
-database_path = "data/pohadkomat.db"
+download_path = "/data/share/Media/Pohadky"
+asrun_path = "asrun.lst"
 default_artist = "Pohadky"
 clips_per_batch = 2
-chromecast_name = "Living room display"
+chromecast_name = "Office speaker"
 http_port = 9734
-access_url = "http://192.168.5.189.:9734"
+access_url = "http://192.168.5.6:9734"

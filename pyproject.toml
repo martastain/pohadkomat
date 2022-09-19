@@ -5,7 +5,7 @@ description = ""
 authors = ["Martastain <martas@imm.cz>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 nxtools = "^1.6"
 typer = "^0.6.1"
 toml = "^0.10.2"
