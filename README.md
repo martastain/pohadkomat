@@ -38,3 +38,16 @@ updates the fairy tale library. RSS sources are definded in
 Run `poetry run -m pohadkomat serve` runs as a background service (systemd). 
 It exposes downloaded files over plain http (to allow chromecasts to play them) 
 as well as a webhook triggered by a big red button (using home assistant). 
+
+### Home assistant
+
+Add the following lines to your Home assistant `configuration.yaml`
+
+```yaml
+rest_command:
+  pohadkomat:
+    url: "https://your_server:9734/play”
+    method: post
+```
+
+Then you can call `RESTful Command: pohadkomat` service to start playing
