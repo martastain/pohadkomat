@@ -5,6 +5,7 @@ url = "https://anchor.fm/s/3d01f0f8/podcast/rss"
 [[feeds]]
 title = "Pohádky zdarma"
 url = "http://justcast.herokuapp.com/shows/radek-spidla-pohadky-zdarma/audioposts.rss"                                                                                           
+
 [[feeds]]
 title = "Kolíbka - tajemné pohádky a příběhy"                                     
 url = "https://zazrak.libsyn.com/rss"                                              
@@ -13,3 +14,10 @@ url = "https://zazrak.libsyn.com/rss"
 title = "Pohadkovidani"
 url = "https://anchor.fm/s/674248f4/podcast/rss"
 
+[[feeds]]
+title = "Pohadky od maminky"
+url = "https://maminkaroku.maminka.cz/kategorie/8368"
+
+[[]]
+title = "Pohadky pro Marusku"
+url = "https://www.spreaker.com/show/5383693/episodes/feed"

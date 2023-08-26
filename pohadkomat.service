@@ -1,0 +1,13 @@
+[Unit]
+Description=Pohadkomat
+After=network.target
+
+[Service]
+User=martas
+Group=imm
+WorkingDirectory=/opt/pohadkomat
+ExecStart=poetry run python -m pohadkomat
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

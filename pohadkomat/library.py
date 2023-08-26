@@ -30,11 +30,9 @@ def get_batch() -> list[str]:
         history = []
     pool = [clip for clip in all_clips if clip not in history]
 
-    for i in range(config.clips_per_batch):
-        clip = random.choice(pool)
-
+    clips = random.sample(pool, config.clips_per_batch)
+    for clip in clips:
         result.append(f"{config.access_url}/media/{clip}")
-
         with open(config.asrun_path, "a") as f:
             f.write(f"{clip}\n")
     return result

@@ -20,6 +20,7 @@ def ensure_chromecast_available() -> bool:
 class Player:
     def __init__(self):
         self.should_run = False
+        self.batch = []
 
     def get_media_controller(self):
         chromecasts, browser = pychromecast.get_listed_chromecasts(
@@ -33,6 +34,10 @@ class Player:
         return chromecast.media_controller
 
     def start(self):
+        if self.batch:
+            logging.warning("Already playing")
+            return
+
         self.should_run = False
         time.sleep(0.5)
         self.should_run = True
@@ -40,15 +45,26 @@ class Player:
         thread.start()
 
     def play_batch(self):
+        self.batch = get_batch()
         media_controller = self.get_media_controller()
 
         if media_controller is None:
             logging.error("Chromecast not found")
+            self.batch = []
+            self.should_run = False
             return
 
-        for url in get_batch():
+        start_time = time.time()
+
+        for url in self.batch:
             if not self.should_run:
                 break
+
+            if time.time() - start_time > 3600:
+                self.batch = []
+                self.should_run = False
+                break
+
             logging.info(f"Playing {get_base_name(url)}")
             media_controller.play_media(url, "audio/mp3")
             media_controller.block_until_active()
@@ -63,6 +79,7 @@ class Player:
                 f"Stopped {get_base_name(url)} ({media_controller.status.player_state})"
             )
 
+        self.batch = []
         logging.info("Batch is finished. Good night")
 
 
