@@ -2,13 +2,12 @@ services:
   pohadkomat:
     image: pohadkomat:latest
     ports:
-      - "3560:3560"
+      - "9734:9734"
     volumes:
-      - ./pohadkomat:/app/pohadkomat
-      - ./media:/media
+      - /data/share/Media/Pohadky:/media
       - ./cache:/cache
     environment:
-      - "POHADKOMAT_BASE_URL=http://192.168.5.231:3560"
-      - "POHADKOMAT_DEVICE_NAME=Living room display"
+      - "POHADKOMAT_BASE_URL=http://192.168.5.6:9734"
+      - "POHADKOMAT_DEVICE_NAME=Bedroom speaker"
     privileged: true
     network_mode: host

@@ -18,7 +18,7 @@ class Config(BaseModel):
     http_port: Annotated[
         int,
         Field(title="HTTP Port", ge=80, lt=65535),
-    ] = 3560
+    ] = 9734
     device_name: Annotated[
         str | None,
         Field(title="Chromecast device name"),
