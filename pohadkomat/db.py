@@ -42,14 +42,16 @@ class MediaDB:
             self.c.execute("DELETE FROM state")
             self.conn.commit()
 
-        for root, d, files in sorted(os.walk(media_dir)):
+        for root, _, files in sorted(os.walk(media_dir)):
             for file in sorted(files):
                 ext = os.path.splitext(file)[1]
+
                 # Ensure we only add audio files
                 if ext.lower() not in [".mp3", ".m4a"]:
                     logging.debug(f"Skipping {file}")
                     continue
-                # Add media to the database
+
+                # Add media file to the database
                 path = os.path.join(root, file).removeprefix(media_dir).lstrip("/")
                 logging.info(f"Adding file: {path}")
                 self.c.execute(
@@ -66,9 +68,17 @@ class MediaDB:
     def get_next(self):
         # Get last played index
         idx = self.get_state("current_idx") or 0
+
         # Select next media
         self.c.execute("SELECT id, title, path FROM media WHERE id > ? LIMIT 1", (idx,))
         row = self.c.fetchone()
+        if row is None:
+            # Every iteration, reset the DB and start from the beginning
+            self.scan(True)
+            q = "SELECT id, title, path FROM media ORDER BY id ASC LIMIT 1"
+            self.c.execute(q)
+            row = self.c.fetchone()
+
         id, title, path = row
         # Update the index
         self.set_state("current_idx", id)
