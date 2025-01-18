@@ -1,22 +1,42 @@
-import typer
+import logging
 
-from pohadkomat.download import download_all
-from pohadkomat.play import get_available_chromecasts
+import typer
+from rich.logging import RichHandler
+
+from pohadkomat.chromecast import get_available_chromecasts
+from pohadkomat.db import MediaDB
 from pohadkomat.server import start_server
+
+# Set-up logging using rich
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    datefmt="[%X]",
+    handlers=[RichHandler(rich_tracebacks=True)],
+)
 
 
 app = typer.Typer()
 
 
 @app.command()
-def list():
+def chromecasts():
     for device in get_available_chromecasts():
-        print(device)
+        logging.info(device)
 
 
 @app.command()
-def download():
-    download_all()
+def scan():
+    mediadb = MediaDB()
+    mediadb.scan(True)
+    mediadb.list_media()
+
+
+@app.command()
+def next():
+    mediadb = MediaDB()
+    logging.info(mediadb.get_next())
 
 
 @app.command()

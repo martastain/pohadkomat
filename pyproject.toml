@@ -3,21 +3,18 @@ name = "pohadkomat"
 version = "0.1.0"
 description = ""
 authors = ["Martastain <martas@imm.cz>"]
+readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-nxtools = "^1.6"
-typer = "^0.6.1"
-toml = "^0.10.2"
-pydantic = "^1.10.2"
-requests = "^2.28.1"
-PyChromecast = "^12.1.4"
-fastapi = "^0.85.0"
-uvicorn = "^0.18.3"
+python = "^3.12"
+pychromecast = "^14.0.5"
+rich = "^13.9.4"
+pydantic = "^2.10.5"
+typer = "^0.15.1"
+fastapi = "^0.115.6"
+uvicorn = "^0.34.0"
 
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
